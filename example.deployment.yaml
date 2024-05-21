@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8-pod-monitor
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: k8-pod-monitor
+  template:
+    metadata:
+      labels:
+        name: k8-pod-monitor
+    spec:
+      containers:
+        - name: pod-status-monitor
+          image: repository
+          imagePullPolicy: Always
+          env:
+            - name: PYTHONUNBUFFERED
+              value:
+            - name: LOAD_CLUSTER_CONFIG
+              value:
+            - name: SLACK_CHANNEL
+              value:
