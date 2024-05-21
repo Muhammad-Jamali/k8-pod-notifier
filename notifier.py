@@ -8,6 +8,10 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
+
+environment=os.environ["ENVIRONMENT"]
+text_format=os.environ["SLACK_TEXT_FORMAT"]
+
 print("Loading config")
 if os.environ["LOAD_CLUSTER_CONFIG"].lower() in ['true', '1']:
     config.load_incluster_config()
@@ -36,8 +40,8 @@ def is_pod_not_ready(pod):
             return True
 
     if pod.metadata.name in not_ready_pods:
-        send_slack_message(f"{str(' ').join(str(pod.metadata.name).split(
-            '-')[:-2])} is ready and can be tested now!")
+        service = str(' ').join(str(pod.metadata.name).split('-')[:-2])
+        send_slack_message(text_format.format(**{"service": service, "environment": environment}))
         not_ready_pods.remove(pod.metadata.name)
 
     return False
