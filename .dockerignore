@@ -1,0 +1,5 @@
+*.yaml
+*.txt
+Makefile
+Dockerfile
+.env
