@@ -23,3 +23,7 @@ spec:
               value:
             - name: SLACK_CHANNEL
               value:
+            - name: ENVIRONMENT
+              value:
+            - name: SLACK_TEXT_FORMAT
+              value: "[{environment}] [{service}] Deployment Completed!"
